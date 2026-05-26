@@ -406,6 +406,26 @@ let trickDone = false;
 let levelComplete = false;
 let actionPressed = false;
 let items = { goldenKey:false, superMagnet:false, speedBoost:false, shield:false };
+const STORAGE_KEY = 'bb_game_v1';
+let _lastSaved = '';
+
+function loadState(){
+  try{
+    const s = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    if(typeof s.stars === 'number') stars = s.stars;
+    if(s.items && typeof s.items === 'object') items = Object.assign(items, s.items);
+  }catch(e){}
+}
+
+function saveStateIfChanged(){
+  try{
+    const payload = JSON.stringify({ stars, items });
+    if(payload !== _lastSaved){
+      localStorage.setItem(STORAGE_KEY, payload);
+      _lastSaved = payload;
+    }
+  }catch(e){}
+}
 
 const CHARS = {
   Alex:  { color:'#e8b13c', maxSpeed:4.4,  acc:.32, fuelMul:1.0,  color2:'#f5d070' },
@@ -812,6 +832,9 @@ function updateHUD(){
   document.getElementById('charName').textContent = selectedChar;
 }
 
+loadState();
+updateHUD();
+
 let msgTimer=null;
 function showMsg(txt, dur=2000){
   let m=document.getElementById('msgBox');
@@ -916,7 +939,7 @@ function update(){
 
   // Fuel consumption
   if(Math.abs(player.speed)>.2){
-    let cons = .04 * ch.fuelMul * (items.shield?.5:1);
+    let cons = .04 * ch.fuelMul * (items.shield ? 0.5 : 1);
     fuel = Math.max(0, fuel-cons);
     if(fuel<=0){
       gameActive=false;
@@ -935,7 +958,7 @@ function update(){
     let d=Math.hypot(player.x-b.x, player.y-b.y);
     if(d < mRange){
       if(items.superMagnet && d>38){ b.x+=(player.x-b.x)*.08; b.y+=(player.y-b.y)*.08; }
-      if(d<38){ b.active=false; fuel=Math.min(100,fuel+35); stars+=5; updateHUD(); playCollect(); spawnParticles(b.x,b.y,'#ff6666'); }
+      if(d<38){ b.active=false; fuel=Math.min(100,fuel+35); stars+=5; updateHUD(); saveStateIfChanged(); playCollect(); spawnParticles(b.x,b.y,'#ff6666'); }
     }
   });
 
@@ -945,7 +968,7 @@ function update(){
     let d=Math.hypot(player.x-s.x, player.y-s.y);
     if(d < mRange){
       if(items.superMagnet && d>32){ s.x+=(player.x-s.x)*.08; s.y+=(player.y-s.y)*.08; }
-      if(d<32){ s.active=false; stars+=10; updateHUD(); playCollect(); spawnParticles(s.x,s.y,'#ffdd00',10); }
+      if(d<32){ s.active=false; stars+=10; updateHUD(); saveStateIfChanged(); playCollect(); spawnParticles(s.x,s.y,'#ffdd00',10); }
     }
   });
 
@@ -955,7 +978,7 @@ function update(){
     let d=Math.hypot(dx,dy);
     if(d>6){ trapavko.x+=dx/d*2.2; trapavko.y+=dy/d*2.2; }
     if(Math.hypot(player.x-cage.x,player.y-cage.y)<55){
-      cageUnlocked=true; stars+=30; updateHUD(); playRescue(); showMsg('Kavez otključan! Pritisni ⚡ za spašavanje!',3000);
+      cageUnlocked=true; stars+=30; updateHUD(); saveStateIfChanged(); playRescue(); showMsg('Kavez otključan! Pritisni ⚡ za spašavanje!',3000);
     }
   }
 
@@ -963,7 +986,7 @@ function update(){
   if(LEVELS[currentLevel].trick!=='chase' && !trickDone && !cageUnlocked && actionPressed){
     if(Math.hypot(player.x-trapavko.x, player.y-trapavko.y)<70){
       trapavko.state='slip';
-      cageUnlocked=true; trickDone=true; stars+=20; updateHUD();
+      cageUnlocked=true; trickDone=true; stars+=20; updateHUD(); saveStateIfChanged();
       playSlip(); spawnParticles(trapavko.x,trapavko.y,'#e8a050',20);
       showMsg('🤣 Trapavko je pao! Trči do kaveza!', 2500);
       setTimeout(()=>trapavko.state='idle',2000);
@@ -972,7 +995,7 @@ function update(){
 
   // Rescue
   if(cageUnlocked && !rescued && Math.hypot(player.x-cage.x,player.y-cage.y)<55 && actionPressed){
-    rescued=true; stars+=50; updateHUD(); playRescue();
+    rescued=true; stars+=50; updateHUD(); saveStateIfChanged(); playRescue();
     spawnParticles(cage.x,cage.y,'#00ff88',30,5);
     spawnParticles(cage.x,cage.y,'#ffdd00',20,4);
     setTimeout(()=>{
@@ -1121,6 +1144,7 @@ document.querySelectorAll('.shop-btn').forEach(btn=>{
     let key={key:'goldenKey',magnet:'superMagnet',speed:'speedBoost',shield:'shield'}[item];
     if(stars>=cost && !items[key]){
       stars-=cost; items[key]=true; updateHUD();
+      saveStateIfChanged();
       document.getElementById('shopStars').textContent=stars;
       btn.textContent='✅ Imaš'; btn.classList.add('owned'); btn.disabled=true;
       btn.closest('.shop-card')?.classList.add('owned');
