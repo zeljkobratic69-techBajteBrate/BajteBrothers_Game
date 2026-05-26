@@ -3,6 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0d1117">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BajteBrothers">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
 <title>BajteBrothers – Rescue Mission</title>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
 <style>
@@ -175,6 +181,36 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--dark);font-fam
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:4px;}
+
+/* ── ANIMATIONS ── */
+@keyframes gradientPulse{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes btnPulse{0%,100%{transform:scale(1) translateY(0)}50%{transform:scale(1.06) translateY(-2px)}}
+@keyframes titleGlow{0%,100%{text-shadow:0 0 30px rgba(255,215,0,.5)}50%{text-shadow:0 0 60px rgba(255,215,0,.95),0 0 120px rgba(255,180,0,.4)}}
+@keyframes floatImg{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-8px) scale(1.015)}}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
+@keyframes starSpin{to{transform:rotate(360deg)}}
+#introScreen,#endScreen{
+  background:linear-gradient(135deg,#0d1117 0%,#1a2a3a 30%,#0d2a1a 60%,#1a1a2a 100%);
+  background-size:300% 300%;
+  animation:gradientPulse 9s ease infinite;
+}
+.overlay h1{animation:titleGlow 2.6s ease-in-out infinite;}
+.overlay img{animation:floatImg 3.8s ease-in-out infinite;}
+#startBtn,#confirmCharBtn,#nextLevelBtn,#replayBtn{animation:btnPulse 1.8s ease-in-out infinite;}
+#startBtn:active,#confirmCharBtn:active,#nextLevelBtn:active,#replayBtn:active,#retryBtn:active{animation:none;}
+
+/* ── CONTROLS HINT (keyboard only) ── */
+#ctrlHint{
+  position:fixed;bottom:14px;left:50%;transform:translateX(-50%);
+  background:rgba(0,0,0,.6);backdrop-filter:blur(8px);
+  color:rgba(255,255,255,.45);font-size:.7rem;font-weight:700;
+  padding:5px 18px;border-radius:20px;z-index:20;pointer-events:none;
+  letter-spacing:.5px;white-space:nowrap;
+}
+
+/* ── DECORATIVE STARS on intro ── */
+.deco-star{position:absolute;pointer-events:none;animation:sparkle 2s ease-in-out infinite;}
+
 </style>
 </head>
 <body>
@@ -207,10 +243,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--dark);font-fam
 
 <!-- ─────────── INTRO SCREEN ─────────── -->
 <div id="introScreen" class="overlay">
-  <img src="slika1.jpg" onerror="this.src='https://placehold.co/380x280/1a3a2a/gold?text=BajteBrothers+1982'" alt="Intro">
+  <span class="deco-star" style="top:8%;left:10%;font-size:1.4rem;animation-delay:.2s">⭐</span>
+  <span class="deco-star" style="top:15%;right:12%;font-size:1rem;animation-delay:.7s">✨</span>
+  <span class="deco-star" style="bottom:20%;left:8%;font-size:1.2rem;animation-delay:1.1s">💫</span>
+  <span class="deco-star" style="bottom:25%;right:10%;font-size:.9rem;animation-delay:1.6s">⭐</span>
+  <img src="slika1.jpg" onerror="this.src='https://placehold.co/380x280/1a3a2a/gold?text=BajteBrothers'" alt="Intro">
   <h1>BajteBrothers<br>Rescue Mission</h1>
   <p>Prijateljstvo traje vječno. Kreni u misiju i spasi sve! ❤️</p>
-  <p style="font-size:.72rem;color:rgba(255,255,255,.35);margin-top:6px;">Okrenite mobitel vodoravno za bolji doživljaj</p>
+  <p style="font-size:.72rem;color:rgba(255,255,255,.35);margin-top:6px;">📱 Okrenite mobitel vodoravno za bolji doživljaj</p>
   <button class="btn" id="startBtn">🚀 KRENI U MISIJU</button>
 </div>
 
@@ -303,13 +343,17 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--dark);font-fam
 <!-- ─────────── GAME OVER ─────────── -->
 <div id="gameOverScreen" class="overlay" style="display:none;">
   <h1 style="color:var(--red);">💀 MISIJA PROPALA</h1>
-  <p>Gorivo je nestalo. Ali BajteBrothers ne odustaju!</p>
+  <p>Gorivo je nestalo — ali BajteBrothers ne odustaju! 💪</p>
+  <p style="font-size:.8rem;color:rgba(255,255,255,.4);margin-top:8px;">Skupi gorivo ⛽ čim kreneš!</p>
   <button class="btn" id="retryBtn">🔄 POKUŠAJ PONOVO</button>
 </div>
 
 <!-- ─────────── ENDING SCREEN ─────────── -->
 <div id="endScreen" class="overlay" style="display:none;">
-  <img src="slika2.jpg" onerror="this.src='https://placehold.co/380x280/1a2a1f/gold?text=Kraj+misije+❤️'" alt="Kraj">
+  <span class="deco-star" style="top:6%;left:8%;font-size:1.6rem;animation-delay:.3s">🏆</span>
+  <span class="deco-star" style="top:10%;right:10%;font-size:1.2rem;animation-delay:.8s">✨</span>
+  <span class="deco-star" style="bottom:18%;left:6%;font-size:1.1rem;animation-delay:1.4s">💛</span>
+  <img src="slika2.jpeg" loading="lazy" onerror="this.src='https://placehold.co/380x280/1a2a1f/gold?text=Kraj+misije+❤️'" alt="Kraj">
   <h1>BajteBrothers<br>Zauvijek! ❤️</h1>
   <p style="font-size:.95rem;max-width:420px;line-height:1.7;">
     Tada su vam u crkvi rekli "ne može".<br>
@@ -320,9 +364,19 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--dark);font-fam
   <button class="btn" id="replayBtn">🔁 IGRAJ PONOVO</button>
 </div>
 
+<!-- Controls hint for keyboard players -->
+<div id="ctrlHint">⌨️ WASD / Strelice · Razmak = ⚡ · E = Shop</div>
+
 <script>
 (function(){
 "use strict";
+
+// ─── PWA: Register Service Worker ───────────────────────────────────
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () =>
+    navigator.serviceWorker.register('./sw.js').catch(e => console.warn('SW registration failed:', e))
+  );
+}
 
 // ─── CANVAS SETUP ───────────────────────────────────────────────────
 const gc = document.getElementById('gameCanvas');
@@ -422,9 +476,9 @@ function playTone(freq, type='sine', dur=.2, vol=.18){
     o.start(t); o.stop(t+dur);
   }catch(e){}
 }
-function playCollect(){ playTone(880,'sine',.25,.15); setTimeout(()=>playTone(1108,'sine',.2,.1),80); }
-function playSlip(){ playTone(180,'sawtooth',.35,.2); setTimeout(()=>playTone(120,'sawtooth',.3,.15),120); }
-function playRescue(){ [523,659,784,1047].forEach((f,i)=>setTimeout(()=>playTone(f,'sine',.4,.2),i*100)); }
+function playCollect(){ if(navigator.vibrate)navigator.vibrate(25); playTone(880,'sine',.25,.15); setTimeout(()=>playTone(1108,'sine',.2,.1),80); }
+function playSlip(){ if(navigator.vibrate)navigator.vibrate(80); playTone(180,'sawtooth',.35,.2); setTimeout(()=>playTone(120,'sawtooth',.3,.15),120); }
+function playRescue(){ if(navigator.vibrate)navigator.vibrate([60,40,120]); [523,659,784,1047].forEach((f,i)=>setTimeout(()=>playTone(f,'sine',.4,.2),i*100)); }
 function playEngine(){
   try{
     let a=getAudioCtx();
@@ -723,8 +777,8 @@ function drawPlayer(t){
 function spawnCollectibles(){
   barrels = [];
   starItems = [];
-  for(let i=0;i<4;i++) barrels.push({ x:120+Math.random()*(gc.width-200), y:60+Math.random()*(gc.height-120), active:true });
-  for(let i=0;i<6;i++) starItems.push({ x:80+Math.random()*(gc.width-160), y:60+Math.random()*(gc.height-120), active:true });
+  for(let i=0;i<5;i++) barrels.push({ x:120+Math.random()*(gc.width-200), y:60+Math.random()*(gc.height-120), active:true });
+  for(let i=0;i<8;i++) starItems.push({ x:80+Math.random()*(gc.width-160), y:60+Math.random()*(gc.height-120), active:true });
 }
 
 function setupLevel(lvl){
@@ -791,8 +845,23 @@ window.addEventListener('mouseup',stickEnd);
 
 // Keyboard
 let keys={};
-window.addEventListener('keydown',e=>{ keys[e.key]=true; if(e.key===' '){e.preventDefault(); doAction();} });
+window.addEventListener('keydown',e=>{
+  keys[e.key]=true;
+  if(e.key===' '){e.preventDefault(); doAction();}
+  if((e.key==='e'||e.key==='E') && state==='playing'){ openShop(); }
+});
 window.addEventListener('keyup',e=>keys[e.key]=false);
+
+// Hide keyboard hint on touch-primary devices
+(function(){
+  const hint = document.getElementById('ctrlHint');
+  if(!hint) return;
+  const isTouch = ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+  if(isTouch && isCoarsePointer){
+    hint.style.display = 'none';
+  }
+})();
 
 // Action button
 const aBtn=document.getElementById('actionBtn');
@@ -866,7 +935,7 @@ function update(){
     let d=Math.hypot(player.x-b.x, player.y-b.y);
     if(d < mRange){
       if(items.superMagnet && d>38){ b.x+=(player.x-b.x)*.08; b.y+=(player.y-b.y)*.08; }
-      if(d<38){ b.active=false; fuel=Math.min(100,fuel+28); stars+=5; updateHUD(); playCollect(); spawnParticles(b.x,b.y,'#ff6666'); }
+      if(d<38){ b.active=false; fuel=Math.min(100,fuel+35); stars+=5; updateHUD(); playCollect(); spawnParticles(b.x,b.y,'#ff6666'); }
     }
   });
 
