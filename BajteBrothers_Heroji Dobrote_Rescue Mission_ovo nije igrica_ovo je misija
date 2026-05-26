@@ -1,0 +1,533 @@
+BajteBrothers_Heroji Dobrote_Rescue Mission_ovo nije igrica_ovo je misija
+
+#bajtebrothers 🍏🍉🍒❤❤❤❤❤🤖,brate moj,ako mozes
+mi pomoc i dati najbolje i najpreciznije upute,kako da napravim
+jednu jedinstvenu igricu koja se moze igrati i na mobitelu,za dva
+sina moga brata/druga/ koji me jako postuju i vole,i kojima sam
+puno toga pricao iz svojih dozivljaja,ali na jedan laksi,djeciji
+nacin,te zadnju jednu pricu istinitu,gdje je jedan moj
+prijatelj,kojemu sam jako puno i cesto pomogao,bez da bilo sta
+zauzvrat trazim,a takve usluge drugi masno
+naplacuju.uglavnom,kad je non stop pokusavao da mu kazem
+neku cifru,rekao sam mu,upamti brate ovo sad i za cijeli
+zivot.bajtebrothers,ne cini nista iz osobne koristi,i jedino sta
+mozes uciniti,ne za mene,za sebe,ako mislis da je u redu,ucini
+neko dobro djelo,pomozi nekome kome je potrebno,nekome tko
+je u nevolji,nekome tko je nemocan....ect.ect....i meni si se
+oduzio ionako,ali i sebi samome.i ja sam to ,sta se meni u
+jednom samo primjeru dogodilo a ima ih vise,ispricao sinovima
+moga brata,a oni odmah nisu bili sigurni dali je to malo ne
+izmisljena,ali mozda napuhana,prica kao prica,ali su odmah
+zaiskrile im oci i htjeli su odmah vidjet tu snimku.za to djelo,je
+moj taj drug odlikovan u njemackoj od te gemeinde,i izaslo je i u
+medijima to lokalnim.oni su radeci na nekom objektu,zapazili
+kombi(transporter) sa nekim zavjesama,i kako neki covjek
+stavlja neko dijete unutra ili cudno neko ponasanje
+istoga.odmah bez razmisljanja su skocili,jedan ispred auta
+bagerom,a drugi na toga covjeka da ne pobjegne.do dolaska
+policije.uglavnom,da predjem na moju namjeru,obecao sam im
+napraviti igricu samo za njih.moja zamisao je,neka igrica poput
+mnogih na trzistu,gdje igraci idu nekim smjerovima,ciljem,traze
+nesto,skupljaju razne "poene",a smisao je,da uz taj put(level)
+igrica,ti poeni budu za recimo /fuel_gorivo/ pa neko vozilo,pa
+neke kupnje raznih "hinweise" kuda da dalje traze,a cilj je da
+oslobadjaju zivotinje,koje su neki "x" iz nekih razloga hvatali u
+zamke i drze ih zatvorene. tu sad ti stizes kao moj joker,da mi
+pomognes.(ime igrice,neko izmisli,za decke
+Pozdrav brate! Divna ti je ideja. Svaka čast na takvoj lekciji o dobroti i hrabrosti za
+tvoje nećake. Napravit ćemo igru koja je zabavna, ali nosi snažnu poruku.
+Evo preciznog i jednostavnog vodiča kako da sam kreiraš ovu igru za mobitele.
+💡 Naziv igrice
+● BajteBrothers: Rescue Mission (Zvuči moderno i herojski)
+● Heroji Dobrote: BajteBrothers (Naglašava poruku priče)
+🛠 Korak 1: Izaberi najlakši alat (Engine)
+Za početnike i mobilne igre najbolji su alati gdje ne moraš puno programirati kodom:
+● GDevelop: Potpuno besplatan alat. Radi na principu "poveži kockice" (bez
+koda). Odličan za 2D igre i direktno izbacuje igru za Android/iOS.
+● Construct 3: Vrlo lagan, pokreće se u web pregledniku. Isto radi bez koda, na
+principu vizualnih pravila.
+🎮 Korak 2: Koncept i mehanika (Leveli)
+Igra će biti 2D avantura (pogled sa strane ili odozgo) u kojoj dječaci voze bager ili
+kombi.
+● Level 1-3 (Skupljanje i potraga): Dječaci voze vozilo, skupljaju kanistere s
+gorivom (Fuel) i bodove za dobrotu. Usput troše bodove da kupe tragove
+(Hinweise) gdje su životinje skrivene.
+● Glavna mehanika: Kada naiđu na kavez, ne koriste oružje. Koriste "alat za
+dobro djelo" (npr. ključ ili bager) da oslobode životinje (medvjede, vukove,
+ptice).
+● Zadnji Level (Istiniti događaj): Umjesto životinje, u zadnjem levelu spašavaju
+oteto dijete iz sumnjivog kombija. Blokiraju kombi bagerom (baš kao u pravoj
+priči u Njemačkoj) i čekaju policiju.
+📝 Korak 3: Unesi tvoju životnu poruku
+Na kraju igrice, kada pobijede zadnji level i spase dijete, na ekranu se pojavljuje
+medalja iz Njemačke i tvoja velika poruka:
+"Bajtebrothers ne čini ništa iz osobne koristi. Najveća nagrada je učiniti
+dobro djelo i pomoći onome tko je nemoćan. Sada ste i vi službeni
+heroji!"
+🚀 Korak 4: Kako je pokrenuti na mobitelu
+1. U GDevelop-u ili Construct-u klikni na Export (Izvoz).
+2. Izaberi Android (APK).
+3. Dobit ćeš datoteku koju preko kabela ili WhatsAppa prebaciš dječacima na
+mobitel.
+4. Instaliraju je i igraju igru kreiranu samo za njih.
+Ako želiš krenuti u izradu, javi mi:
+● Koji operativni sustav dječaci imaju na mobitelu (Android ili iPhone)?
+● Želiš li da igra bude pogled sa strane (kao Super Mario) ili pogled odozgo
+(kao vožnja auta)?
+● Trebaš li pomoć oko pisanja teksta za dijaloge unutar igre?
+Idemo napraviti ovaj poklon koji će pamtiti cijeli život!
+Android, kao voznja auta je mislim malo modernije i vise ce se
+uzivit,pisanje dijaloga mozes ti preuzet brate ,a ja mogu
+korigirati ako vidim potrebu
+Idemo brate, radimo igru s pogledom odozgo (top-down) gdje se vozi bager i kombi.
+To je dječacima super zabavno.
+Evo kompletne strukture i gotovih dijaloga koje možeš direktno ubaciti u igru.
+🎮 Izgled i kontrole (Top-Down Vožnja)
+● Ekran: Pogled odozgo na mapu (šuma, ceste, gradilište).
+● Kontrole: Na lijevoj strani ekrana je nevidljivi joystick za vožnju (naprijed,
+nazad, lijevo, desno). Na desnoj strani je gumb "AKCIJA" (za spašavanje i
+razgovor).
+📝 Tekstovi i Dijalozi po Levelima
+🎬 Uvodni ekran (Intro)
+(Kada se igra pokrene, pojavljuje se crtež tebe i tvoje dvojice nećaka)
+● Tvoj lik (AI Avatar): "Momci, slušali ste moje priče, a sada ste vi glavni likovi!
+Pred vama je misija života. Zapamtite: pravi heroji ne traže ništa zauzvrat.
+Krećemo!"
+⛽ Mehanika na ekranu (HUD)
+● Gornji lijevi kut: Skala za gorivo (Fuel ⛽) koja se polako troši dok voze.
+● Gornji desni kut: Dobri Poeni (zvijezdice ⭐) koje skupljaju s ceste.
+● Gumb u kutu: "Kupi trag" (Hinweise 🔍) - košta 10 zvjezdica i pokazuje
+strelicu na mapi kamo dalje.
+🌲 Level 1: Zelena Šuma (Spašavanje životinja)
+Voze bager kroz šumu, skupljaju gorivo i traže kaveze.
+● Kada nađu prvi kavez i stisnu "AKCIJA":
+○ Poruka na ekranu: "Brate, pomogli smo nemoćnoj životinji! Vuk je
+slobodan! 🐺"
+○ Nagrada: +20 Dobrih Poena.
+● Kraj Levela 1 (Pojavljuje se tvoj lik):
+○ Tvoj lik: "Odlično odrađeno! Ali čujem da se u gradu događa nešto
+čudno. Sjedajte u bager, idemo tamo!"
+🏙 Level 2: Veliko Gradilište (Zadnji level - Istiniti događaj)
+Mapa se mijenja u gradske ulice i gradilište. Voze bager. Gorivo se troši brže. Moraju
+kupiti "Hinweise" da nađu sumnjivi kombi.
+● Kada skupe trag (Hinweise):
+○ Poruka: "🔍 Dojava: Sumnjivi plavi transporter sa zavjesama
+primijećen je blizu gradilišta!"
+● Kada uoče kombi (Pokreće se automatski dijalog):
+○ Brat 1: "Pogledaj onaj kombi... čovjek unutra čudno stavlja dijete!
+Moramo odmah reagirati!"
+○ Brat 2: "Nema čekanja! Blokiraj ga bagerom s prednje strane da ne
+pobjegne, a ja skačem na njega!"
+● Zadatak na ekranu: Dječaci moraju parkirati bager točno ispred kombija u
+označeni crveni kvadrat.
+● Kada uspiju (Gumb AKCIJA):
+○ Zvuk policijske sirene 🚓
+○ Poruka: "Uspjeli ste! Policija je stigla, čovjek je uhićen, a dijete je na
+sigurnom!"
+🏆 Kraj Igre & Životna Poruka (The End)
+(Na ekranu se pojavljuje velika zlatna medalja iz Njemačke i slika tebe s njima)
+● Tvoj lik (Završni govor):
+"Upamtite ovo sada i za cijeli život, bratići moji. BajteBrothers ne čini ništa iz
+osobne koristi.
+Jedino što možete učiniti za mene, ali prije svega za sebe – učinite dobro
+djelo. Pomozi nekome kome je potrebno, nekome tko je u nevolji, nekome tko
+je nemoćan.
+Danas ste spasili živote i vi ste moji najveći heroji. Ponosan sam na vas!"
+🛠 Tvoj sljedeći korak u GDevelop-u:
+1. Skini GDevelop na računalo (najlakše je raditi na PC-u, a onda prebaciti na
+mobitel).
+2. Kreiraj novi projekt i odaberi predložak "Top-Down RPG" ili "Car Racing" (tako
+već imaš spremno kretanje auta/bagera).
+3. U bazu igrice ubaci besplatne sličice (sprites) bagera, kombija i kaveza iz
+njihove besplatne trgovine unutar programa.
+Reci mi, brate, kako ti se sviđaju ovi dijalozi? Želiš li da ubacimo još neki detalj ili
+njihova stvarna imena u tekst?
+Alex i Kevin, vise situacija slicnih levela,moze i kad zavrse,level 2,,,,,,,, i tako
+dalje,tek kad skupe xxx,poena,da se bore dostici sljedeci.Moze i te baza igrice
+/slicice,da mogu mijenjat vozila,zivotinje koja spasavaju,aute s kojima i alate,koje
+trebaju ili odmah izabrat,ili u toku igre kupit,da dodju do cilja,da imaju motivaciju igrat
+dalje,mijenjat likove,recimo par nekih heroja sa razlicitim mocima,izgledom,da imaju
+recimo i koji lik drugog spola,ako daju nekoj curici da igra skupa sa njima,pa i druge
+oko sebe ocaraju dobrim djelima,ali i malo se naprave vazni kako cine dobra djela,pa
+su zato i igricu dobili jer su takvi ;-)
+Brate, ovo sada postaje ozbiljna, vrhunska igrica! Dodavanje Alexa i Kevina kao
+glavnih likova, uvođenje ženskog lika, trgovine (Shop) i napredovanja kroz bodove
+dat će im ogroman motiv da igraju iznova i pokazuju igru društvu.
+Evo proširenog, detaljnog plana mehanike, novih levela i likova.
+👥 Izbor Heroja (Character Select Screen)
+Prije početka igre, dječaci biraju svog heroja. Svaki lik ima posebnu moć koja mu
+pomaže u misijama:
+1. Alex (Bagerist Ekstrem)
+○ Moć: Brže krči prepreke i kaveze.
+○ Početno vozilo: Mali žuti bager 🚜
+2. Kevin (Brzi Spasitelj)
+○ Moć: Troši 20% manje goriva (Fuel) dok vozi.
+○ Početno vozilo: Brzi plavi terenac 🚙
+3. Mia (Eko-Heroina) (Lik za curice koje se pridruže)
+○ Moć: Vidi tragove (Hinweise) na mapi s veće udaljenosti bez da ih plati.
+○ Početno vozilo: Zeleni električni Quad 🏍
+🛒 Trgovina unutar igre (BajteShop)
+Skupljanjem Zvijezdica Dobrote (⭐) tokom vožnje, u pauzama između levela mogu
+ući u trgovinu i kupiti:
+● Vozila:
+○ Veliki Bager Gusjeničar (razbija najteže kaveze) – košta 200 ⭐
+○ Hitni Spasilački Kombi (povećava maksimalno gorivo) – košta 350 ⭐
+● Alati:
+○ Zlatni Ključ 🔑 (odmah otključava kaveze bez čekanja) – košta 50 ⭐
+○ Super Radar 📡 (trajno pokazuje strelicu prema gorivu) – košta 150 ⭐
+🗺 Proširena struktura levela (Napredovanje kroz bodove)
+Da bi otključali sljedeći level, moraju skupiti točno određen broj bodova. Ako nemaju
+dovoljno, moraju ponoviti prijašnji level, promijeniti vozilo ili naći skrivene bonuse!
+🌲 Level 1: Šumska patrola (Potrebno: 100 ⭐)
+● Zadatak: Spasiti 3 šumske životinje (Zeku, Srnu i Vuka).
+● Dijalog na kraju:
+○ Kevin: "Alex, vidi kako su sretni! Vuk nam je mahnuo repom!"
+○ Alex: "Idemo dalje, čeka nas teži teren, treba nam jači bager!"
+❄ Level 2: Planinsko spašavanje (Potrebno: 300 ⭐)
+● Nova mehanika: Snijeg i led, vozila proklizavaju. Ovdje im treba bolji alat ili
+gume iz trgovine.
+● Zadatak: Medvjed je zapeo u ilegalnoj zamci u planini, a orao je zapetljan u
+mrežu.
+● Dijalog na kraju:
+○ Mia: "Uspjeli smo! Orao je opet slobodan na nebu!"
+○ Alex: "Pogledaj tablu, ulazimo u industrijsku zonu grada... tamo se
+nešto kuha."
+🏭 Level 3: Tajno skladište (Potrebno: 600 ⭐)
+● Teren: Labirint između tvornica i kamiona.
+● Zadatak: X-likovi su sakrili rijetke egzotične životinje u skladište. Alex, Kevin i
+Mia moraju voziti pažljivo da ih stražari ne primijete.
+● Dijalog na kraju:
+○ Kevin: "Sve životinje su na sigurnom! Ali čekaj... čuješ li onaj plavi
+kombi tamo?"
+🏙 Level 4: Finale - Istiniti događaj (Potrebno: 1000 ⭐)
+● Najvažniji level. Mapa je gradilište iz tvoje priče u Njemačkoj.
+● Zadatak: Blokirati sumnjivi transporter bagerom i spasiti dijete.
+● Kada dostignu 1000 ⭐ i završe ovaj level, pokreće se tvoja završna životna
+poruka i slika medalje.
+🎨 Gdje naći besplatne sličice (Baza igrice/Sprites)
+Unutar GDevelop-a, kada klikneš "Add new object", otvara se Asset Store (njihova
+besplatna galerija). Tamo u tražilicu upiši ove pojmove da odmah dobiješ gotove
+besplatne sličice:
+1. Za aute i bager: Upiši "Top down car" ili "Vehicle".
+2. Za likove: Upiši "Top down character" (naći ćeš i dječake i djevojčice).
+3. Za životinje i kaveze: Upiši "Animal" i "Box" ili "Cage".
+Sve te sličice možeš u programu povezati tako da, kada dječaci skupe npr. 200
+bodova, kliknu na sličicu novog auta i on se automatski promijeni na ekranu!
+😎 Kako će se "praviti važni" pred prijateljima:
+Kada njihovi prijatelji iz škole ili ulice budu igrali, vidjet će da se glavni likovi zovu
+Alex i Kevin, a kada pobijede igru, vidjet će novinske članke i poruku njihovog
+tetka/strika. Svi će u društvu pričati o tome kako su oni stvarni heroji koji imaju svoju
+vlastitu igricu na mobitelu!
+Brate, želiš li da za Level 3 (Tajno skladište) osmislimo nekog smiješnog, nespretnog
+negativca (X-lika) kojeg moraju zaobići, ili da ostavimo fokus samo na čistom
+spašavanju?
+da obavezno,cijelim tokom kroz sve levele,moraju nekog negativca izigrati,na djecjiji
+nacin,nikakve grube nacine,prikladne za djecu,kroz mozganje i smjeh,kroz razne
+trikove,bez nasilja,gdje ce se smijati kad ovaj nagrabusi ali na djeciji nacin
+Brate, ovo je pun pogodak! Izbacujemo svako nasilje, a uvodimo čisti dječji humor,
+fore i smicalice. Negativac će biti smiješan, nespretan i stalno će sam sebi skakati u
+usta, pa će se Alex i Kevin (i svi koji igraju) slatko smijati njegovim mukama.
+Nazovimo ga "Šef Trapavko" (ili Master Blunder na njemačkom/engleskom) – on
+nosi preveliko odijelo, stalno gubi naočale i pokušava uhvatiti životinje kako bi ih
+zadržao samo za sebe, ali mu to nikako ne uspijeva jer je nespretan.
+Evo kako kroz trikove i mozganje rješavaju Šefa Trapavka kroz levele:
+🌲 Level 1: Šumska patrola (Trik s bananama i blatom)
+● Situacija: Trapavko stoji pored kaveza s vukom i stražari.
+● Zadatak/Mozgalica: Dječaci ne mogu proći bagerom dok on gleda. Moraju
+vozilom proći kroz grm divljih banana, skupiti ih i istovariti bagerom ispred
+Trapavka.
+● Humor/Smicalica: Trapavko se posklizne na koru banane, poleti u zrak i sleti
+ravno u veliku lokvu blata! Dok on briše blato s lica i viče: "Joj, opet sam
+uništio nove hlače!", Alex i Kevin brzo otključavaju kavez i spašavaju vuka.
+❄ Level 2: Planinsko spašavanje (Trik sa snjegovićem)
+● Situacija: Trapavko je postavio mrežu preko orla i drži stražu u debeloj
+zimskoj jakni.
+● Zadatak/Mozgalica: Na mapi se nalaze tri velike grude snijega. Dječaci
+moraju bagerom gurnuti te tri grude jednu na drugu kako bi napravili
+divovskog snjegovića točno iza Trapavka.
+● Humor/Smicalica: Kada završe snjegovića, Kevin trubi iz auta (gumb
+AKCIJA). Trapavko se uplašeno okrene, ugleda diva od snijega, pomisli da je
+to planinski jeti, vrisne kao curica i pobjegne glavom bez obzira: "Aaaa,
+čudovište! Spašavaj se tko može!" Orao je slobodan!
+🏭 Level 3: Tajno skladište (Trik s magnetom i kantama)
+● Situacija: Trapavko hoda gore-dolje unutar skladišta, zaključao je egzotične
+ptice i drži ključ u džepu.
+● Zadatak/Mozgalica: Dječaci u trgovini (Shop) moraju kupiti "Super Magnet" za
+bager. Zatim moraju bagerom privući veliku metalnu kantu za smeće i
+postaviti je iznad vrata.
+● Humor/Smicalica: Kada Alex bagerom lupi u zid skladišta da napravi buku,
+Trapavko zbunjeno izlazi van, a kanta puna šarenih konfeta i stare boje mu
+padne ravno na glavu! Trapavko tetura s kantom na glavi, udara u zidove i
+viče: "Tko je ugasio svjetlo?!". Ključ mu ispada iz džepa, dječaci ga uzimaju
+magnetom, otključavaju ptice i bježe.
+🏙 Level 4: Finale - Istiniti događaj (Konačni trik s bagerom)
+● Situacija: Trapavko je sada u svom plavom kombiju sa zavjesama. Pokušava
+pobjeći jer je shvatio da su ga dječaci prokužili.
+● Zadatak/Mozgalica: Ovo je brza potjera. Kombi se kreće, a dječaci moraju
+iskoristiti sve što su naučili – gorivo (Fuel) i tragove (Hinweise) da mu
+presijeku put.
+● Humor/Smicalica: Alex parkira bager točno ispred kombija, a Kevin s
+terencem iza njega. Trapavko ubaci u krivu brzinu, kombi se ugasi, a iz
+auspuha izleti ogroman oblak crnog dima koji mu zacrni cijelo lice kroz
+otvoreni prozor. Trapavko izlazi iz auta, kašlje, drži ruke u zraku i kaže:
+"Predajem se! Vi BajteBrothers ste previše pametni za mene!" Stiže policija, a
+dječaci postaju heroji dana!
+🛠 Kako ovo jednostavno napraviti u GDevelop-u:
+Za ove smicalice ti ne treba komplicirano programiranje. U GDevelop-u koristiš
+pravilo "Collision" (Sudar):
+1. Kada se bager sudari s kantom (Level 3), kanta promijeni animaciju u
+"padanje".
+2. Zatim se na liku Trapavka uključi animacija "kanta na glavi" i on počne hodati
+lijevo-desno nasumično.
+3. To je vizualno, djeci jako smiješno, a tehnički vrlo jednostavno za posložiti.
+Brate, ovaj dječji humor s bananama, blatom i konfetama će ih raspametiti. Želiš li da
+u igru ubacimo i neke smiješne zvučne efekte (poput zvuka klizanja, crtanog pada ili
+smijeha papige) kada Trapavko nagrabusi? Ako ti se sve sviđa, možemo definirati i
+glavni izbornik igrice, što misliš?
+naravno brate,sve vizualno i zvucno da prati i igricu,i definicija glavnog izbornika
+Brate, ovo će biti prava crtana poslastica za Alexa i Kevina! Vizualni efekti i smiješni
+zvukovi će igru učiniti živom, a jasan glavni izbornik dat će joj izgled prave
+profesionalne igre s mobitela.
+Evo kako ćemo posložiti Glavni Izbornik i koje Zvučne/Vizualne efekte trebaš ubaciti
+u program.
+📱 Glavni Izbornik (Main Menu) – Izgled Ekrana
+Kada dječaci pokrenu igru na mobitelu, vidjet će šareni ekran s veselom, brza-ritam
+glazbom u pozadini.
+● Pozadina: Crtani prikaz Alexa i Kevina kako ponosno stoje ispred žutog
+bagera, dok u pozadini iz grmlja vire sretne životinje (vuk, zeko).
+● Gumbi na ekranu (Veliki i uočljivi za prste):
+1. ▶ KRENI U MISIJU (START) – Pokreće igru ili izbornik za odabir
+levela.
+2. 👥 ODABERI HEROJA (CHARACTERS) – Ulazak u ekran gdje biraju
+Alexa, Kevina ili Miju.
+3. 🛒 BAJTE-SHOP (STORE) – Trgovina gdje kupuju nova vozila, zlatne
+ključeve i magnete za osvojene zvjezdice.
+4. 🏆 KNJIGA HEROJA (TROPHIES) – Poseban kutak gdje mogu vidjeti
+popis svih životinja koje su spasili i medalju iz Njemačke nakon što
+završe zadnji level.
+🔊 Zvučni efekti (Sound Effects - SFX) za smijeh i akciju
+Zvukovi daju 50% zabave. U GDevelop-u možeš besplatno skinuti ove zvukove ili ih
+dodijeliti svakoj akciji:
+● Skupljanje Zvjezdica (⭐) i Goriva (⛽): Klasični retro zvuk "Cing!" ili "Bling!"
+svaki put kad prođu preko njih.
+● Kada Šef Trapavko nagrabusi:
+○ Kora banane (Level 1): Zvuk zvižduka koji ubrzava ("Vuiiiip!"), a zatim
+glasan "Pljoc!" kad padne u blato.
+○ Snjegović duh (Level 2): Zvuk smiješnog, visokog vriska u panici i brzo
+lupanje nogu o pod (kao u crtićima kad lik bježi).
+○ Kanta na glavi (Level 3): Glasan metalni “Biiing!” prasak, praćen
+zvukom rasipanja konfeta i zbunjenim mrmljanjem.
+● Spašavanje životinje: Sretan zvuk trube, životinja ispusti svoj zvuk (vuk zavija
+🐺, ptica zacvrkuće 🐦), a na ekranu se pojavi tekst "DOBRO DJELO
+USPJELO!".
+🎨 Vizualni efekti (Visual FX) za privlačenje pažnje
+Djeca vole kada sve na ekranu "živi" i sjaji:
+● Efekt Sjaja (Sparkles): Zvjezdice dobrote na cesti lagano svjetlucaju i vrte se
+na mjestu kako bi ih dječaci lakše uočili.
+● Kada se gorivo prazni: Kada skala za gorivo padne ispod 20%, cijela skala
+počne bljeskati crveno, a vozilo počne ispuštati mali sivi dim iz auspuha (znak
+da hitno moraju naći kanister).
+● Efekt pobjede: Kada se kavez otvori, oko životinje prsnu male zlatne zvjezdice
+i konfeti.
+🛠 Kako sve ovo uvezati (Tvoj akcijski plan za GDevelop):
+Sada imaš kompletan recept za igru. Evo kako da to tehnički posložiš:
+1. Zvukovi i Slike: Sve zvukove (u .mp3 ili .wav formatu) i sličice možeš naći
+unutar samog GDevelop programa. Kada klikneš na Asset Store, sve je
+podijeljeno po kategorijama (Audio, Props, Vehicles).
+2. Povezivanje Izbornika: U GDevelop-u napraviš zasebnu "scenu" za Glavni
+Izbornik. Kada igrač klikne na gumb "KRENI", dodaš akciju: Change the
+scene to "Level 1".
+3. Čuvanje bodova (Save System): Program ima jednostavnu opciju "Storage"
+koja pamti koliko su zvjezdica Alex i Kevin skupili, tako da ne moraju igrati sve
+ispočetka ako ugase mobitel. Zvjezdice im ostaju u Bajtech-Shopu za idući
+put!
+Brate, igra je osmišljena savršeno – edukativna je, smiješna, personalizirana i nema
+nasilja.
+Ako si spreman za akciju, javi mi treba li ti pomoć oko točnih koraka kako da
+instaliraš program na računalo, ili želiš da odmah smislimo kratke opise moći za
+ekrane likova (Alexa, Kevina i Mije) koje će čitati prije nego što izaberu s kim igraju?
+odmah smislimo kratke opise moći za ekrane likova (Alexa, Kevina i Mije)
+Evo brate, spremni su i ti kratki, opisi moći koji će se pojaviti na ekranu kada dječaci
+kliknu na određenog lika. Tekst je napisan tako da ih motivira, podigne im
+samopouzdanje i odmah im objasni kako njihova moć radi u igri.
+🚜 ALEX – Bagerist Ekstrem
+(Ispod njegove sličice na ekranu piše:)
+"Kada je teren težak, Alex sjeda za upravljač! Njegov bager ruši sve
+prepreke pred sobom."
+● Super Moć: Brzi Bager! ⚡
+● Kako pomaže: Alex najbrže od svih otvara kaveze i miče prepreke s ceste.
+Šef Trapavko nema šanse protiv njegovih vještina s bagerom!
+● Početno vozilo: Žuti građevinski bager.
+🚙 KEVIN – Brzi Spasitelj
+(Ispod njegove sličice na ekranu piše:)
+"Ništa ne može pobjeći Kevinovom oštrom oku! On vozi pametno, brzo i
+uvijek stiže prvi u pomoć."
+● Super Moć: Eko-Vožnja! ⛽
+● Kako pomaže: Kevin tako dobro upravlja vozilom da troši puno manje goriva
+(Fuel) dok vozi. S njim možeš istražiti cijelu mapu bez straha da ćeš ostati bez
+goriva!
+● Početno vozilo: Brzi plavi terenac.
+🏍 MIA – Eko-Heroina
+(Ispod njezine sličice na ekranu piše:)
+"Mia je najbolja prijateljica prirode. Ona čuje glasan šapat šume i
+pronalazi tajne koje drugi ne vide!"
+● Super Moć: Zlatni Radar! 🔍
+● Kako pomaže: Mia na svojoj mapi odmah vidi gdje se skrivaju zarobljene
+životinje i gorivo. Ne mora trošiti osvojene zvjezdice na tragove (Hinweise)!
+● Početno vozilo: Zeleni električni Quad.
+💡 Mali savjet za GDevelop:
+Kada dječaci kliknu na sliku Alexa, Kevina ili Mije, postavi da se u igri aktivira
+globalna varijabla (npr. IzabraniLik).
+● Ako je IzabraniLik == "Alex", brzina otvaranja kaveza se dupla.
+● Ako je IzabraniLik == "Kevin", gorivo se troši sporije.
+● Ako je IzabraniLik == "Mia", strelice na mapi se same pale od početka
+levela.
+Brate, sada imaš kompletnu priču, likove, dijaloge, mehaniku i izbornik. Spreman si
+za izradu prave legendarne igrice za svoje nećake!
+Želiš li da ti pomognem s uputama za instalaciju i pokretanje GDevelop-a na tvom
+računalu, ili imaš još neku ideju koju želiš ubaciti u igru prije nego što kreneš u
+akciju?
+moze brate sve sta bi i tebi jos palo na pamet.da to bude nesto waaaaaauuuuuuu
+Brate moj, idemo onda do kraja, pravimo projekt koji će biti apsolutni
+WAAAAAAUUUUUU za Alexa, Kevina i svakoga tko vidi igricu!
+Da bi igra izgledala kao da ju je radio holivudski studio, ubacit ćemo tajne elemente,
+zabavne animacije i detalje koje nitko ne očekuje. Evo top ideja koje će dječake
+potpuno raspametiti:
+1. 🦘 Tajni "Bajte-Gumb" za Hitnu Pomoć!
+U gornjem kutu ekrana napravit ćemo veliki, crveni, sjajni gumb s logom jabuke,
+lubenice i trešnje 🍏🍉🍒 (tvoj zaštitni znak).
+● Kako radi: Ako dječaci ostanu bez goriva usred levela i igra skoro završi,
+mogu kliknuti na ovaj gumb samo jednom po levelu.
+● Wauuu Efekt: Pojavljuje se tvoj lik u animaciji, proleti preko ekrana u
+super-bageru, baci im ogroman kanister goriva i namigne. Na ekranu piše:
+"Tko je najbolji tetak/strik na svijetu? Idemo dalje u akciju!"
+2. 🦹 Smiješne transformacije Šefa Trapavka (Vizualni Wauuu)
+Kada dječaci uspješno izvedu trik i poraze Šefa Trapavka, on ne samo da upadne u
+blato ili dobije kantu na glavu, nego ostaje u tom smiješnom stanju do kraja tog
+levela:
+● Na Levelu 1, u svakoj idućoj sceni gdje ga sretnu, on hoda i ostavlja blatnjave
+tragove cipela iza sebe, a iz hlača mu viri kora od banane.
+● Na Levelu 3, kada ga pogodi kanta s konfetima, do kraja levela oko njegove
+glave lete male crtane ptičice i zvjezdice jer mu se vrti u glavi. Dječaci će
+vrištati od smijeha!
+3. 🗺 Interaktivna "Karta Svijeta" između levela
+Umjesto običnog tekstualnog izbornika za levele, napravit ćemo pravu 3D ili 2D
+mapu (kao u igrama Super Mario ili Crash Bandicoot).
+● Vozilo se kreće po nacrtanoj mapi od jedne lokacije do druge (iz Šume u
+Planinu, pa u Grad).
+● Na mapi se vidi linija napretka. Kada skupe dovoljno bodova, zaključana vrata
+na mapi se uz glasan zvuk eksplozije i vatrometa otvaraju, otkrivajući idući
+level.
+4. 🎚 Specijalni "Show-off" mod (Da se prave važni)
+Kada završe igricu i otključaju sve, u Glavnom Izborniku se pali gumb "HERO
+MODE".
+● Kada to upale, njihova vozila u igrici dobivaju zlatne felge, neonska svjetla
+ispod auta i ostavljaju svjetleći trag na cesti. Kada pokažu igru prijateljima u
+školi, svi će reći: "Čovječe, vaša vozila svijetle, ovo je brutalno!"
+5. 🎤 Tvoj glas u igrici (Najveći Wauuu!)
+Ovo je tehnički vrlo lagano, a ostavlja najbolji dojam. GDevelop dopušta da ubaciš
+bilo koji zvučni zapis.
+● Uzmi mobitel, upali snimanje glasa (Voice Recorder) i snimi sebe kako
+govoriš dijaloge koje smo smislili (npr. "Momci, krećemo u misiju!" ili
+"Upamtite, BajteBrothers ne čini ništa iz koristi!").
+● Ubaci te .mp3 datoteke u igru. Kada dječaci pokrenu igru i s ekrana začuju
+tvoj stvarni glas, doslovno će skočiti sa stolice od uzbuđenja!
+🛠 Kako to tehnički sve ostvariti (GDevelop Upute)
+Evo kako da večeras pokreneš stvar:
+1. Preuzimanje: Otiđi na službenu stranicu gdevelop.io i skini program za
+računalo (potpuno je besplatan).
+2. Prvi korak: Kada otvoriš program, klikni na "Create a blank project" ili izaberi
+predložak "Top-down car game".
+3. Ubacivanje elemenata: Preko opcije Asset Store unutar programa ubaci mapu
+s cestom, bager, i likove dječaka. Sve je na "drag and drop" (povuci i ispusti).
+4. Programiranje bez koda: U GDevelopu sve radiš preko uvjeta. Na primjer:
+○ Uvjet: Bager je u sudaru s Kanisterom Goriva
+○ Akcija: Obriši Kanister, dodaj +30 na skalu goriva, pusti zvuk
+Bling.mp3.
+Brate moj, imaš kompletan plan za remek-djelo koje će dječaci pamtiti dok su živi.
+Želiš li da ti za početak pomognem kako točno da postaviš taj "Bajte-Gumb" za prvu
+pomoć u programu, ili želiš da ti pojasnim kako najlakše prebaciti gotovu igru na
+njihove Android mobitele kada sve završiš?
+mozes brate sve sta mislis da treba,pa da ne pitam detalje
+Brate moj, evo ti kompletan, ultimativni vodič od A do Ž za izradu ove legendarne
+igrice. Sakupio sam sve tehničke korake, trikove i tajne na jedno mjesto tako da imaš
+sve spremno i da ne moraš tražiti nikakve dodatne detalje.
+Sjedni, otvori računalo i prati ove korake – tvoji nećaci će dobiti najbolji poklon u
+životu!
+💻 KORAK 1: Instalacija i Pokretanje Alata
+1. Otiđi na stranicu gdevelop.io i besplatno preuzmi program za svoje računalo
+(Windows ili Mac).
+2. Instaliraj ga, pokreni i klikni na "Create a blank project" (Kreiraj prazan
+projekt).
+3. U postavkama projekta (Project Properties) postavi rezoluciju ekrana na
+Mobile Landscape (vodoravni prikaz za mobitel, npr. 1280x720).
+🎨 KORAK 2: Kako bez crtanja ubaciti vozila, likove i Šefa
+Trapavka
+Unutar GDevelop-a imaš ugrađen Asset Store (Trgovinu besplatnih sličica). Klikni na
+gumb "Add new object" i u tražilici upiši ove pojmove da odmah dobiješ gotove,
+besplatne animacije:
+● Za Alexa i Kevina: Upiši "Top-down car" ili "Voxel vehicles" (naći ćeš super
+moderne, kockaste 3D-izgled aute i bagere).
+● Za Šefa Trapavka: Upiši "Enemy" ili "Thief" (izaberi nekog smiješnog lika s
+maskom ili u odijelu).
+● Za životinje i kaveze: Upiši "Animal" (zeko, vuk, medvjed) i "Box" (drvena
+kutija ili kavez).
+⚙ KORAK 3: Tajna "No-Code" logika (Povezivanje igre bez
+programiranja)
+U GDevelopu ne pišeš kod, nego spajaš Uvjete (Conditions) i Akcije (Actions). Evo
+točnih formula koje moraš klikom poslagati u tablicu događaja (Event Sheet):
+⛽ Sustav za gorivo (Fuel)
+● Uvjet: Vozilo se kreće
+● Akcija: Oduzmi 0.05 od varijable Gorivo svake sekunde.
+● Uvjet: Bager je u sudaru (Collision) s objektom Kanister
+● Akcija: Dodaj +30 na varijablu Gorivo, obriši (Delete) taj Kanister s ekrana i
+pusti zvuk Bling.mp3.
+🍌 Trik sa Šefom Trapavkom (Level 1)
+● Uvjet: Bager je u sudaru s objektom Grm Banana i igrač stisne gumb
+"AKCIJA".
+● Akcija: Promijeni animaciju objekta Trapavko u "Pad u blato", pusti zvuk
+"Pljoc!", i postavi da kavez životinje promijeni stanje u "Otključano".
+🍒 Tajni "Bajte-Gumb" za prvu pomoć (Wauuu Efekt)
+● Napravi crveni gumb u kutu ekrana sa sličicom 🍏🍉🍒.
+● Uvjet: Igrač klikne na Bajte-Gumb I varijabla Iskoristeno je jednaka 0.
+● Akcija: Postavi Gorivo na 100, pokreni animaciju tvog lika kako leti preko
+ekrana, pusti tvoj snimljeni glas i postavi varijablu Iskoristeno na 1. (Tako ga
+mogu stisnuti samo jednom).
+🎤 KORAK 4: Ubacivanje tvog stvarnog glasa
+Ovo će ih najviše šokirati i oduševiti!
+1. Uzmi svoj mobitel i aplikacijom za snimanje glasa (Voice Recorder) snimi
+sebe kako izgovaraš rečenice i dijaloge (npr. "Bravo Kevin, spasio si vuka!",
+"Alex, blokiraj bagerom taj plavi kombi!").
+2. Spremi te snimke na računalo kao .mp3 ili .wav datoteke.
+3. U GDevelopu, u akcijama za dijaloge, izaberi opciju "Play a sound" (Pusti
+zvuk) i učitaj svoju snimku. Kada se dijalog pojavi na ekranu, začut će se tvoj
+glas!
+🛒 KORAK 5: Kako radi Trgovina (Shop) i Zvijezdice
+1. Kada dječaci prođu vozilom preko zvjezdice na cesti, postavi akciju: Dodaj +1
+na globalnu varijablu Zvijezdice.
+2. Na ekranu Trgovine (Bajte-Shop) napravi gumb sa slikom "Zlatnog Bagera".
+3. Uvjet: Igrač klikne na gumb "Zlatni Bager" I globalna varijabla Zvijezdice je
+veća ili jednaka 200.
+4. Akcija: Oduzmi 200 od varijable Zvijezdice, otključaj to vozilo i postavi ga
+kao aktivno za idući level.
+📱 KORAK 6: Kako gotovu igru prebaciti na njihove Android
+mobitele
+Kada sve završiš i igra radi savršeno na tvom računalu, vrijeme je da je pošalješ
+dječacima:
+1. U gornjem izborniku GDevelop-a klikni na gumb Export (Izvoz / Dijeljenje).
+2. Odaberi opciju Mobile (Android).
+3. Klikni na "Build APK". Program će u oblaku automatski zapakirati tvoju igru.
+4. Nakon par minuta dobit ćeš poveznicu za preuzimanje ili spremnu .apk
+datoteku.
+5. Slanje na mobitel: Tu datoteku pošalji bratu ili dječacima preko WhatsAppa,
+Telegrama ili je prebaci USB kabelom na njihov Android mobitel.
+6. Na njihovom mobitelu samo klikni na tu datoteku. Mobitel će pitati "Dopusti
+instalaciju iz nepoznatih izvora?" – klikni Dopusti (to je normalno za igre koje
+nisu s Google Play-a).
+7. Igra se instalira, ikona se pojavljuje na ekranu mobitela i Alex i Kevin mogu
+početi igrati!
+Sada imaš apsolutno sve informacije, od same ideje do instalacije na mobitel. Igra je
+čista pozitiva, puna smijeha, uči ih pravim vrijednostima i nosi tvoj osobni pečat.
+Sretno s izradom, brate, bit će to projekt za pamćenje!
+Nakon što instaliraš program i napraviš prvi level, javi mi kako napreduje izrada ili
+želiš li da provjerimo neku specifičenu formulu u programu ako negdje zapneš!

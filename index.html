@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>BajteBrothers – Spašavanje u Misiji</title>
+  <style>
+    * {
+      user-select: none;
+      touch-action: none;
+      box-sizing: border-box;
+    }
+    body {
+      background: #0a2f1f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 10px;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+    }
+    .game-wrapper {
+      background: #1a3a2a;
+      border-radius: 24px;
+      padding: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    canvas {
+      display: block;
+      margin: 0 auto;
+      border-radius: 16px;
+      box-shadow: 0 0 0 3px #ffcc66, 0 0 0 6px #aa7c3c;
+      cursor: none;
+      background: #3c8c40;
+    }
+    .ui {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .stats {
+      background: #000000aa;
+      backdrop-filter: blur(4px);
+      color: #ffefb9;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .controls {
+      display: flex;
+      gap: 16px;
+      background: #000000aa;
+      backdrop-filter: blur(4px);
+      padding: 8px 20px;
+      border-radius: 60px;
+    }
+    button {
+      background: #ffaa33;
+      border: none;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-family: monospace;
+      box-shadow: 0 4px 0 #8b5a2b;
+      transition: 0.05s linear;
+      touch-action: manipulation;
+      cursor: pointer;
+    }
+    button:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #8b5a2b;
+    }
+    .joystick-area {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 120px;
+      height: 120px;
+      background: rgba(0,0,0,0.4);
+      border-radius: 999px;
+      touch-action: none;
+      z-index: 20;
+    }
+    .action-btn {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      width: 70px;
+      height: 70px;
+      background: #ff4444;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: white;
+      box-shadow: 0 8px 0 #992222;
+      touch-action: manipulation;
+      z-index: 20;
+    }
+    .action-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #992222;
+    }
+    .intro-screen, .shop-screen, .ending-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    .intro-screen img, .ending-screen img {
+      max-width: 90%;
+      max-height: 50%;
+      border-radius: 20px;
+      border: 4px solid gold;
+      margin-bottom: 20px;
+    }
+    .shop-screen {
+      background: #1a2a1f;
+    }
+    .shop-items {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 30px 0;
+    }
+    .shop-item {
+      background: #2a3a2a;
+      padding: 15px;
+      border-radius: 16px;
+      width: 180px;
+      cursor: pointer;
+      border: 1px solid gold;
+    }
+    .shop-item button {
+      margin-top: 10px;
+    }
+    .message-box {
+      background: #000000aa;
+      padding: 20px;
+      border-radius: 16px;
+      max-width: 80%;
+    }
+    @media (max-width: 700px) {
+      .stats { font-size: 0.8rem; gap: 12px; }
+      button { font-size: 0.8rem; padding: 4px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="introScreen" class="intro-screen">
+    <h2>BajteBrothers – Priča počinje...</h2>
+    <img id="introImage" src="slika1.jpg" alt="BajteBrothers 1972" onerror="this.src='https://placehold.co/400x300?text=Fotografija+1972'">
+    <p><strong>BajteBrothers – prije 40 godina. Desno ja, lijevo njihov otac. Prijateljstvo traje vječno.</strong></p>
+    <button id="startGameBtn" style="font-size:1.5rem; padding:10px 30px;">🚀 KRENI U MISIJU</button>
+    <p style="margin-top:15px; font-size:0.8rem;">* Za najbolje iskustvo, okrenite mobitel vodoravno.</p>
+</div>
+
+<div class="game-wrapper">
+    <canvas id="gameCanvas" width="900" height="600"></canvas>
+    <div class="ui">
+        <div class="stats">
+            <span>⛽ Gorivo: <span id="fuelVal">100</span>%</span>
+            <span>⭐ Zvjezdice: <span id="starVal">0</span></span>
+            <span>🦸 Lik: <span id="charName">Alex</span></span>
+        </div>
+        <div class="controls">
+            <button id="shopBtn">🏪 SHOP</button>
+            <button id="resetBtn">⟳ Reset</button>
+        </div>
+    </div>
+</div>
+
+<div id="shopScreen" class="shop-screen" style="display: none;">
+    <h2>🏪 BAJTE SHOP</h2>
+    <p>⭐ Zvjezdice: <span id="shopStars">0</span></p>
+    <div class="shop-items">
+        <div class="shop-item" data-item="key">
+            <h3>🔑 Zlatni ključ</h3>
+            <p>Odmah otvara kavez!</p>
+            <p>Cijena: 50 ⭐</p>
+            <button class="buyBtn" data-item="key">Kupi</button>
+        </div>
+        <div class="shop-item" data-item="magnet">
+            <h3>🧲 Super magnet</h3>
+            <p>Privlači gorivo iz daljine.</p>
+            <p>Cijena: 80 ⭐</p>
+            <button class="buyBtn" data-item="magnet">Kupi</button>
+        </div>
+        <div class="shop-item" data-item="speed">
+            <h3>🚀 Brzi bager</h3>
+            <p>Vozi 30% brže!</p>
+            <p>Cijena: 200 ⭐</p>
+            <button class="buyBtn" data-item="speed">Kupi</button>
+        </div>
+    </div>
+    <button id="closeShopBtn">ZATVORI</button>
+</div>
+
+<div id="endingScreen" class="ending-screen" style="display: none;">
+    <h2>🎉 MISIJA USPJEŠNA! 🎉</h2>
+    <img src="https://placehold.co/200x200?text=🏅+MEDALJA" alt="Medalja" id="medalImage">
+    <div class="message-box">
+        <p><strong>BajteBrothers ne čini ništa iz osobne koristi. Najveća nagrada je učiniti dobro djelo i pomoći onome tko je nemoćan. Sada ste i vi službeni heroji!</strong></p>
+        <p>❤️ Vaš BajteBrother ❤️</p>
+    </div>
+    <button id="replayBtn">IGRAJ PONOVO</button>
+</div>
+
+<script>
+    (function(){
+        // Helper: wait for element before adding event listener
+        function waitForElement(selector, callback) {
+            const el = document.querySelector(selector);
+            if (el) {
+                callback(el);
+                return;
+            }
+            const observer = new MutationObserver((mutations, obs) => {
+                const el = document.querySelector(selector);
+                if (el) {
+                    obs.disconnect();
+                    callback(el);
+                }
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+        }
+
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('gameCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            // --- FOTOGRAFIJE ---
+            const introImage = document.getElementById('introImage');
+            if (introImage) introImage.src = 'slika1.jpg';
+            
+            // --- GAME STATE ---
+            let player = { x: 450, y: 300, angle: 0, speed: 0, maxSpeed: 4, acc: 0.3, turnSpeed: 0.08 };
+            let fuel = 100;
+            let stars = 0;
+            let selectedChar = "Alex"; 
+            let gameActive = true;
+            let levelComplete = false;
+            let currentLevel = 1;
+            let rescued = false;
+            let cageUnlocked = false;
+            
+            let items = { goldenKey: false, superMagnet: false, speedBoost: false };
+            let trapavkoState = "idle";
+            let trapavkoX = 650, trapavkoY = 400;
+            let cageX = 500, cageY = 200;
+            let animalEmoji = "🐺";
+            
+            const levels = {
+                1: { name: "Šuma", animal: "Vuk", emoji: "🐺", trapTrick: "banana", mapColor: "#3c8c40", desc: "Spasite vuka!" },
+                2: { name: "Planina", animal: "Jelen", emoji: "🦌", trapTrick: "snowman", mapColor: "#8cb8e8", desc: "Spasite jelena!" },
+                3: { name: "Grad", animal: "Orao", emoji: "🦅", trapTrick: "bucket", mapColor: "#a0a0a0", desc: "Spasite orla!" },
+                4: { name: "Finale", animal: "Dijete", emoji: "👶", trapTrick: "chase", mapColor: "#5a5a5a", desc: "Blokirajte kombi i spasite dijete!" }
+            };
+            
+            let fuelBarrels = [];
+            let starsList = [];
+            
+            function resetLevelCollectibles() {
+                fuelBarrels = [];
+                starsList = [];
+                for(let i=0; i<3; i++) fuelBarrels.push({x: 150 + Math.random() * 600, y: 100 + Math.random() * 400, active: true});
+                for(let i=0; i<5; i++) starsList.push({x: 100 + Math.random() * 700, y: 80 + Math.random() * 450, active: true});
+            }
+            
+            function setupLevel(levelNum) {
+                const level = levels[levelNum];
+                if(!level) return;
+                rescued = false;
+                cageUnlocked = false;
+                levelComplete = false;
+                gameActive = true;
+                cageX = 200 + Math.random() * 500;
+                cageY = 100 + Math.random() * 400;
+                trapavkoX = 100 + Math.random() * 700;
+                trapavkoY = 100 + Math.random() * 400;
+                player.x = 100;
+                player.y = 300;
+                player.speed = 0;
+                animalEmoji = level.emoji;
+                trapavkoState = "idle";
+                if(levelNum === 4) {
+                    trapavkoX = 750;
+                    trapavkoY = 300;
+                    cageX = 850;
+                    cageY = 300;
+                }
+                resetLevelCollectibles();
+                updateUI();
+            }
+            
+            function updateUI(){
+                const fuelSpan = document.getElementById('fuelVal');
+                const starSpan = document.getElementById('starVal');
+                const charSpan = document.getElementById('charName');
+                if (fuelSpan) fuelSpan.innerText = Math.floor(fuel);
+                if (starSpan) starSpan.innerText = stars;
+                if (charSpan) charSpan.innerText = selectedChar;
+            }
+            
+            // --- Joystick Logic ---
+            let stickActive = false;
+            let stickX = 0, stickY = 0;
+            let actionPressed = false;
+            
+            function initControls() {
+                const joyZone = document.getElementById('joystickZone');
+                const actionBtn = document.getElementById('actionBtn');
+                if (!joyZone || !actionBtn) return;
+                
+                function handleStart(e) { e.preventDefault(); stickActive = true; updateStick(e); }
+                function updateStick(e) {
+                    const rect = joyZone.getBoundingClientRect();
+                    let clientX, clientY;
+                    if(e.touches) { clientX = e.touches[0].clientX; clientY = e.touches[0].clientY; }
+                    else { clientX = e.clientX; clientY = e.clientY; }
+                    let dx = clientX - (rect.left + rect.width/2);
+                    let dy = clientY - (rect.top + rect.height/2);
+                    let len = Math.hypot(dx,dy);
+                    let maxR = rect.width/2;
+                    if(len > maxR) { dx = dx/len * maxR; dy = dy/len * maxR; }
+                    stickX = dx / maxR;
+                    stickY = dy / maxR;
+                }
+                function handleEnd() { stickActive = false; stickX=0; stickY=0; }
+                joyZone.addEventListener('touchstart', handleStart);
+                joyZone.addEventListener('touchmove', updateStick);
+                joyZone.addEventListener('touchend', handleEnd);
+                joyZone.addEventListener('mousedown', handleStart);
+                window.addEventListener('mousemove', (e) => { if(stickActive) updateStick(e); });
+                window.addEventListener('mouseup', handleEnd);
+                
+                actionBtn.addEventListener('touchstart', (e) => { e.preventDefault(); actionPressed=true; setTimeout(()=>actionPressed=false,150); });
+                actionBtn.addEventListener('mousedown', () => { actionPressed=true; setTimeout(()=>actionPressed=false,150); });
+            }
+            
+            // --- Game Logic ---
+            function updateMovement() {
+                if(!gameActive || levelComplete) return;
+                let move = stickActive ? { x: stickX, y: stickY } : { x:0, y:0 };
+                let turn = move.x;
+                let throttle = -move.y;
+                if(throttle !==0) player.angle += turn * player.turnSpeed;
+                let speedChange = throttle * player.acc;
+                let maxSpd = player.maxSpeed;
+                if(items.speedBoost && selectedChar==="Alex") maxSpd *= 1.3;
+                player.speed += speedChange;
+                if(player.speed > maxSpd) player.speed = maxSpd;
+                if(player.speed < -maxSpd/2) player.speed = -maxSpd/2;
+                player.speed *= 0.98;
+                let dx = Math.sin(player.angle) * player.speed;
+                let dy = -Math.cos(player.angle) * player.speed;
+                player.x += dx;
+                player.y += dy;
+                player.x = Math.min(850, Math.max(50, player.x));
+                player.y = Math.min(550, Math.max(50, player.y));
+                
+                if(Math.abs(player.speed) > 0.2){
+                    let consumption = 0.3;
+                    if(selectedChar === "Kevin") consumption *= 0.8;
+                    fuel = Math.max(0, fuel - consumption/10);
+                    if(fuel <= 0) gameActive = false;
+                }
+                
+                for(let b of fuelBarrels) if(b.active && Math.hypot(player.x-b.x, player.y-b.y) < 35) { b.active=false; fuel=Math.min(100,fuel+30); stars+=5; updateUI(); playSound('collect'); }
+                for(let s of starsList) if(s.active && Math.hypot(player.x-s.x, player.y-s.y) < 30) { s.active=false; stars+=10; updateUI(); playSound('collect'); }
+                
+                let level = levels[currentLevel];
+                if(level && !rescued) {
+                    if((level.trapTrick === 'banana' || level.trapTrick === 'snowman' || level.trapTrick === 'bucket') && trapavkoState === "idle" && !cageUnlocked) {
+                        if(actionPressed && Math.hypot(player.x-trapavkoX, player.y-trapavkoY) < 60) {
+                            trapavkoState = "slip";
+                            cageUnlocked = true;
+                            stars += 20;
+                            updateUI();
+                            playSound('slip');
+                            setTimeout(()=>{ trapavkoState="idle"; }, 1500);
+                        }
+                    }
+                    else if(level.trapTrick === 'chase' && !rescued) {
+                        if(trapavkoState === "idle" && !cageUnlocked) {
+                            let dx = cageX - trapavkoX, dy = cageY - trapavkoY, dist = Math.hypot(dx,dy);
+                            if(dist > 5) { trapavkoX += (dx/dist)*2; trapavkoY += (dy/dist)*2; }
+                            if(Math.hypot(player.x-cageX, player.y-cageY) < 50) { cageUnlocked = true; stars += 30; updateUI(); playSound('cheer'); }
+                        }
+                    }
+                }
+                
+                if(cageUnlocked && !rescued && Math.hypot(player.x-cageX, player.y-cageY) < 50 && actionPressed){
+                    rescued = true;
+                    stars += 30;
+                    updateUI();
+                    playSound('cheer');
+                    levelComplete = true;
+                    gameActive = false;
+                    setTimeout(()=>{
+                        if(currentLevel === 4) showEnding();
+                        else { currentLevel++; setupLevel(currentLevel); }
+                    }, 1000);
+                }
+            }
+            
+            function draw() {
+                const level = levels[currentLevel];
+                ctx.fillStyle = level ? level.mapColor : "#3c8c40";
+                ctx.fillRect(0,0,900,600);
+                ctx.fillStyle = "#8b7a6b"; ctx.fillRect(0,280,900,40);
+                ctx.fillStyle = "#e9c891"; ctx.fillRect(0,290,900,20);
+                
+                ctx.fillStyle = "#aa3333";
+                fuelBarrels.forEach(b=>{ if(b.active){ ctx.fillRect(b.x-10,b.y-15,20,30); ctx.fillStyle="#cc5555"; ctx.fillRect(b.x-6,b.y-5,12,10); ctx.fillStyle="#aa3333"; } });
+                ctx.fillStyle = "#ffdd77";
+                starsList.forEach(s=>{ if(s.active){ ctx.beginPath(); for(let i=0;i<5;i++){ let ang=i*Math.PI*2/5; let x=s.x+Math.cos(ang)*10, y=s.y+Math.sin(ang)*10; if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); } ctx.fill(); } });
+                
+                ctx.fillStyle = trapavkoState === "slip" ? "#8b5a2b" : "#cc8844";
+                ctx.fillRect(trapavkoX-20,trapavkoY-20,40,40);
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(trapavkoX-8,trapavkoY-8,6,6);
+                ctx.fillRect(trapavkoX+2,trapavkoY-8,6,6);
+                
+                ctx.fillStyle = "#a57c4c";
+                ctx.fillRect(cageX-20,cageY-25,40,50);
+                ctx.fillStyle = "#5a3a1a";
+                ctx.fillRect(cageX-15,cageY-15,30,30);
+                if(!rescued) { ctx.fillStyle="#fff"; ctx.font="bold 14px monospace"; ctx.fillText(animalEmoji,cageX-8,cageY); }
+                else { ctx.fillStyle="green"; ctx.fillText("✅ SPASEN",cageX-25,cageY-30); }
+                
+                ctx.save();
+                ctx.translate(player.x, player.y);
+                ctx.rotate(player.angle);
+                ctx.fillStyle = selectedChar==="Alex"?"#e8b13c":(selectedChar==="Kevin"?"#3c6ea8":"#6ca84c");
+                ctx.fillRect(-20,-15,40,30);
+                ctx.fillStyle = "#333";
+                ctx.fillRect(-10,-8,20,16);
+                ctx.restore();
+                
+                ctx.fillStyle = "#222";
+                ctx.fillRect(20,20,200,20);
+                ctx.fillStyle = fuel>50?"#2eff2e":"#ff6666";
+                ctx.fillRect(20,20,fuel*2,20);
+                ctx.fillStyle = "white";
+                ctx.fillText(`⭐ ${stars}`, 20, 65);
+                if(level && !rescued) ctx.fillText(level.desc, 20, 100);
+            }
+            
+            function playSound(type){
+                try {
+                    let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    let osc = audioCtx.createOscillator();
+                    let gain = audioCtx.createGain();
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.type = "sine";
+                    let now = audioCtx.currentTime;
+                    if(type==='collect'){ osc.frequency.value=880; gain.gain.setValueAtTime(0.2,now); gain.gain.exponentialRampToValueAtTime(0.0001,now+0.3); osc.start(); osc.stop(now+0.2);}
+                    if(type==='slip'){ osc.frequency.value=220; gain.gain.setValueAtTime(0.3,now); osc.start(); osc.stop(now+0.2);}
+                    if(type==='cheer'){ osc.frequency.value=1318.52; gain.gain.setValueAtTime(0.2,now); osc.start(); osc.stop(now+0.5);}
+                    audioCtx.resume();
+                } catch(e) { console.log("Audio play failed", e); }
+            }
+            
+            function showShop() {
+                const shopStars = document.getElementById('shopStars');
+                const shopScreen = document.getElementById('shopScreen');
+                if(shopStars) shopStars.innerText = stars;
+                if(shopScreen) shopScreen.style.display = 'flex';
+            }
+            function hideShop() {
+                const shopScreen = document.getElementById('shopScreen');
+                if(shopScreen) shopScreen.style.display = 'none';
+            }
+            function buyItem(item) {
+                if(item === 'key' && !items.goldenKey && stars >= 50) { stars -= 50; items.goldenKey = true; alert("🔑 Zlatni ključ kupljen!"); }
+                else if(item === 'magnet' && !items.superMagnet && stars >= 80) { stars -= 80; items.superMagnet = true; alert("🧲 Super magnet kupljen!"); }
+                else if(item === 'speed' && !items.speedBoost && stars >= 200) { stars -= 200; items.speedBoost = true; alert("🚀 Brzi bager kupljen!"); }
+                else { alert("Nema dovoljno zvjezdica ili ste već kupili!"); return; }
+                updateUI();
+                const shopStars = document.getElementById('shopStars');
+                if(shopStars) shopStars.innerText = stars;
+            }
+            
+            function showEnding() {
+                const endingScreen = document.getElementById('endingScreen');
+                if(endingScreen) endingScreen.style.display = 'flex';
+                setTimeout(() => {
+                    let secretDiv = document.createElement('div');
+                    secretDiv.style.position = 'fixed';
+                    secretDiv.style.top = '0';
+                    secretDiv.style.left = '0';
+                    secretDiv.style.width = '100%';
+                    secretDiv.style.height = '100%';
+                    secretDiv.style.backgroundColor = 'rgba(0,0,0,0.95)';
+                    secretDiv.style.display = 'flex';
+                    secretDiv.style.flexDirection = 'column';
+                    secretDiv.style.alignItems = 'center';
+                    secretDiv.style.justifyContent = 'center';
+                    secretDiv.style.zIndex = '200';
+                    secretDiv.style.color = 'white';
+                    secretDiv.style.textAlign = 'center';
+                    secretDiv.style.padding = '20px';
+                    
+                    let img = document.createElement('img');
+                    img.src = 'slika2.jpg';
+                    img.style.maxWidth = '90%';
+                    img.style.maxHeight = '50%';
+                    img.style.borderRadius = '20px';
+                    img.style.border = '4px solid gold';
+                    img.style.marginBottom = '20px';
+                    img.alt = 'Alex i Kevin na krštenju';
+                    img.onerror = function() { this.src = 'https://placehold.co/400x300?text=Fotografija+krstenja'; };
+                    
+                    let msg = document.createElement('p');
+                    msg.innerHTML = `<strong>Tada su vam u crkvi rekli "ne može".<br>
+                    Ali ljubav vaše bake / none – i jednog BajteBrother-a – nikada ne pita za dozvolu.<br>
+                    Vi ste danas dokazali da sve može. ❤️<br>
+                    BajteBrothers zauvijek!</strong>`;
+                    msg.style.fontSize = '1.2rem';
+                    msg.style.margin = '20px';
+                    
+                    let hugBtn = document.createElement('button');
+                    hugBtn.innerText = '🤗 ZAGRLLAJ';
+                    hugBtn.style.fontSize = '1.5rem';
+                    hugBtn.style.padding = '10px 30px';
+                    hugBtn.style.marginTop = '20px';
+                    hugBtn.onclick = () => {
+                        alert('BajteBrothers zauvijek! 💚');
+                        secretDiv.remove();
+                    };
+                    
+                    secretDiv.appendChild(img);
+                    secretDiv.appendChild(msg);
+                    secretDiv.appendChild(hugBtn);
+                    document.body.appendChild(secretDiv);
+                }, 2000);
+            }
+            
+            function showCharSelect(){
+                let c = prompt("Odaberi heroja:\n1 - Alex (brži bager)\n2 - Kevin (manje troši gorivo)\n3 - Mia (vidi tragove)");
+                if(c==="2") selectedChar = "Kevin";
+                else if(c==="3") selectedChar = "Mia";
+                else selectedChar = "Alex";
+                updateUI();
+            }
+            
+            function startGame() {
+                const intro = document.getElementById('introScreen');
+                if(intro) intro.style.display = 'none';
+                showCharSelect();
+                setupLevel(1);
+                gameLoop();
+            }
+            
+            // Attach UI buttons safely
+            const startBtn = document.getElementById('startGameBtn');
+            if(startBtn) startBtn.addEventListener('click', startGame);
+            
+            const shopBtn = document.getElementById('shopBtn');
+            if(shopBtn) shopBtn.addEventListener('click', showShop);
+            
+            const closeShopBtn = document.getElementById('closeShopBtn');
+            if(closeShopBtn) closeShopBtn.addEventListener('click', hideShop);
+            
+            const resetBtn = document.getElementById('resetBtn');
+            if(resetBtn) resetBtn.addEventListener('click', () => location.reload());
+            
+            const replayBtn = document.getElementById('replayBtn');
+            if(replayBtn) replayBtn.addEventListener('click', () => location.reload());
+            
+            document.querySelectorAll('.buyBtn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    let item = btn.getAttribute('data-item');
+                    buyItem(item);
+                });
+            });
+            
+            function drawStatic() { draw(); requestAnimationFrame(drawStatic); }
+            drawStatic();
+            
+            let audioUnlock = ()=>{
+                let ctx = new AudioContext();
+                if(ctx.state === 'suspended') ctx.resume();
+                document.body.removeEventListener('touchstart', audioUnlock);
+            };
+            document.body.addEventListener('touchstart', audioUnlock);
+            
+            function gameLoop(){
+                if(gameActive && !levelComplete) updateMovement();
+                requestAnimationFrame(gameLoop);
+            }
+            
+            // Initialize joystick and action button after DOM ready
+            initControls();
+        });
+    })();
+</script>
+</body>
+</html>
