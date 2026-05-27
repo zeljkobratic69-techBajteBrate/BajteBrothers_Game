@@ -1,0 +1,87 @@
+<!-- Corrupted backup of index.html created automatically -->
+<!-- If you have a good copy of index.html, replace this file and then delete this backup. -->
+
+gh auth login
+# slijedi interaktivne upute u browseru/terminalu
+
+git checkout feature/levels-upgrades
+git add index.html README.md barba_zeljko_*.mp3
+git commit -m "Add levels 8-9, vehicle upgrades, README updates and TTS MP3s"
+git push -u origin feature/levels-upgradesUTTON HANDLERS ───────────────────────────────────────────────────
+document.getElementById('startBtn').addEventListener('click',()=>{state='charSelect';showScreen('charScreen');showMsg('Biraj junaka i pokaži Trapavku tko je gazda!',2200);});
+document.querySelectorAll('.char-card').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('.char-card').forEach(cc=>cc.classList.remove('selected'));
+    c.classList.add('selected');selectedChar=c.dataset.char;trails=[];
+    if(selectedChar==='Lara'){
+      showMsg(`${CHARS[selectedChar].emoji} Lara - Noćna vozačica! Imaš posebni nivo!
+Skupi zvjezdice za bonus!`,2800);
+    } else if(selectedChar==='Nova'){
+      showMsg(`${CHARS[selectedChar].emoji} Nova - Elektri-heroj! Brz kao munja!
+Akcioniši Trapavka s energijom!`,2500);
+    } else {
+      showMsg(`${CHARS[selectedChar].emoji} ${selectedChar} spreman za herojsku misiju!`,1700);
+    }
+  });
+});
+document.getElementById('confirmCharBtn').addEventListener('click',()=>{
+  showScreen(null);state='playing';setupLevel(1);
+  setTimeout(()=>{getAC().resume().catch(()=>{});startMissionAmbience();},120);
+});
+document.getElementById('closeShopBtn').addEventListener('click',()=>{
+  document.getElementById('shopScreen').style.display='none';state='playing';
+});
+document.querySelectorAll('.shop-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    if(btn.disabled)return;
+    let item=btn.dataset.item,cost=+btn.dataset.cost;
+    let keyMap={
+      key:'goldenKey',magnet:'superMagnet',speed:'speedBoost',shield:'shield',
+      engineAlex:'engineAlex',opticsAlex:'opticsAlex',skinAlex:'skinAlex',
+      engineKevin:'engineKevin',opticsKevin:'opticsKevin',skinKevin:'skinKevin'
+    };
+    let k=keyMap[item];
+    if(stars>=cost&&!items[k]){
+      stars-=cost;items[k]=true;saveProgress();updateHUD();
+      document.getElementById('shopStars').textContent=stars;
+      btn.textContent='✅ Imaš';btn.classList.add('owned','bought');btn.disabled=true;
+      btn.closest('.shop-card')?.classList.add('owned','bought');
+      spawnP(gc.width/2,gc.height/2,'#ffdd00',30,5);
+      setTimeout(()=>btn.classList.remove('bought'),420);
+      showMsg('Kupljeno! 🎉',1400);
+      playEncourageTone();
+      if(item==='key'&&!cageUnlocked){cageUnlocked=true;showMsg('🔑 Ključ korišten!',2000);}    
+    } else {showMsg('Nema dovoljno zvjezdica! ⭐',1500);missionCheer();}
+  });
+});
+document.getElementById('nextLevelBtn').addEventListener('click',()=>{
+  if(currentLevel===6){
+    if(selectedChar==='Lara'){currentLevel=7;}
+    else{showEnding();return;}
+  } else if(currentLevel===7){
+    showEnding();return;
+  }
+  currentLevel++;showScreen(null);state='playing';setupLevel(currentLevel);
+});
+document.getElementById('retryBtn').addEventListener('click',()=>{showScreen(null);state='playing';setupLevel(currentLevel);});
+document.getElementById('replayBtn').addEventListener('click',()=>location.reload());
+document.getElementById('resetBtn')?.addEventListener('click',()=>{resetProgress();location.reload();});
+document.body.addEventListener('touchstart',()=>{
+  try{getAC().resume();}catch(e){}
+  let kh=document.getElementById('kbHint');if(kh)kh.style.display='none';
+},{once:true});
+
+// ── SERVICE WORKER REGISTRATION ───────────────────────────────────────
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg=>{console.log('SW registered',reg);})
+      .catch(err=>{console.log('SW failed',err);});
+  });
+}
+
+})();
+</script>
+<div id="kbHint">📱 Dodirni ekran za vožnju<br>⚡ Pritisni tipku za akciju</div>
+</body>
+</html>
